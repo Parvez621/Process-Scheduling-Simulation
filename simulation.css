@@ -1,0 +1,252 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  min-height: 100vh;
+}
+
+.sim-container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 12px 32px rgba(44, 62, 80, 0.10);
+  padding: 2.5rem 2rem 2rem 2rem;
+}
+
+.sim-title {
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: #2b4162;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
+}
+
+.sim-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.2rem;
+}
+
+.sim-block {
+  background: #eaf6ff;
+  border-radius: 1rem;
+  padding: 1.1rem 0.7rem 1.3rem 0.7rem;
+  box-shadow: 0 3px 10px rgba(44, 62, 80, 0.08);
+}
+
+.sim-block-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #205081;
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+.sim-slot {
+  min-height: 3.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.sim-cpu-idle {
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #888;
+  font-size: 1.3rem;
+  background: #f6f9fc;
+  border-radius: 0.6rem;
+}
+
+.sim-process {
+  background: linear-gradient(90deg, #4299e1 60%, #90cdf4 100%);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  border-radius: 0.7rem;
+  font-size: 1.1rem;
+  margin: 0.2rem 0;
+  box-shadow: 0 2px 6px rgba(66, 153, 225, 0.10);
+}
+
+.sim-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  justify-content: flex-start;
+}
+
+.sim-timer-label {
+  font-weight: 600;
+  color: #1a365d;
+  font-size: 1.1rem;
+}
+
+.sim-timer-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2b6cb0;
+  margin-right: 1.5rem;
+}
+
+.sim-btn {
+  background: #2b6cb0;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.7rem 2.1rem;
+  border: none;
+  border-radius: 0.8rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 6px rgba(44, 62, 80, 0.10);
+}
+.sim-btn:hover {
+  background: #205081;
+}
+
+.sim-log {
+  background: #f3f8ff;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.2rem 1.2rem 0.8rem 1.2rem;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
+}
+
+.sim-log h3 {
+  margin-top: 0;
+  color: #1a365d;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+}
+
+.sim-log-box {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.02rem;
+  background: #eaf6ff;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem;
+  min-height: 6rem;
+  max-height: 12rem;
+  overflow-y: auto;
+  color: #22577a;
+}
+
+.sim-gantt {
+  margin-bottom: 2.2rem;
+}
+
+
+.gantt-segment.p1 { background: #4299e1; }
+.gantt-segment.p2 { background: #48bb78; }
+.gantt-segment.p3 { background: #f6ad55; }
+.gantt-segment.p4 { background: #ed64a6; }
+.gantt-segment.p5 { background: #9f7aea; }
+.gantt-segment.p6 { background: #ecc94b; }
+.gantt-segment.p7 { background: #38b2ac; }
+.gantt-segment.p8 { background: #d53f8c; }
+.gantt-segment.p9 { background: #805ad5; }
+.gantt-segment.p10 { background: #f56565; }
+.gantt-segment.idle { background: #cbd5e0; color: #555; }
+
+/* Gantt Chart Container */
+.gantt-bar {
+  display: flex;
+  align-items: stretch;
+  height: 3rem;
+  background: #f0f4f8;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  position: relative;
+  padding: 2px;
+  gap: 1px;
+  border: 1px solid #cbd5e0;
+}
+
+/* Individual Segment */
+.gantt-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  height: 100%;
+  min-width: 40px;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  white-space: nowrap;
+  padding: 0 5px;
+}
+
+/* Axis (Time Units) */
+.gantt-axis {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1px;
+  padding: 4px 2px 0 2px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.gantt-tick {
+  width: 40px;
+  text-align: center;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+
+.sim-metrics {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.sim-metrics-list {
+  list-style: disc inside;
+  font-size: 1.1rem;
+  color: #2a4365;
+  margin: 0.6rem 0 0 0.2rem;
+  padding: 0;
+}
+
+.sim-progress-bg {
+  width: 220px;
+  height: 1.3rem;
+  background: #e2e8f0;
+  border-radius: 0.7rem;
+  margin-top: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.sim-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4299e1 60%, #90cdf4 100%);
+  border-radius: 0.7rem 0 0 0.7rem;
+  transition: width 0.4s;
+}
+
+.sim-progress-label {
+  margin-left: 0.5rem;
+  font-weight: 700;
+  color: #2b6cb0;
+  font-size: 1.05rem;
+}
+
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Process Scheduling Simulation</title>
+  <link href="simulation.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="sim-container">
+    <h1 class="sim-title">Process Scheduling Simulation</h1>
+    <div class="sim-grid">
+      <div class="sim-block">
+        <h2 class="sim-block-title">Job Queue</h2>
+        <div id="jobQueue" class="sim-slot"></div>
+      </div>
+      <div class="sim-block">
+        <h2 class="sim-block-title">Ready Queue</h2>
+        <div id="readyQueue" class="sim-slot"></div>
+      </div>
+      <div class="sim-block">
+        <h2 class="sim-block-title">CPU</h2>
+        <div id="cpuSlot" class="sim-cpu-idle">Idle</div>
+      </div>
+      <div class="sim-block">
+        <h2 class="sim-block-title">Job Completed</h2>
+        <div id="jobCompleted" class="sim-slot"></div>
+      </div>
+    </div>
+    <div class="sim-controls">
+      <span class="sim-timer-label">Timer:</span>
+      <span id="simTimer" class="sim-timer-value">0</span>
+      <button class="sim-btn" id="startBtn">Start</button>
+      <button class="sim-btn" id="pauseBtn">Pause</button>
+      <button class="sim-btn" id="resetBtn">Reset</button>
+    </div>
+    <div class="sim-log">
+      <h3>Simulation Log</h3>
+      <pre id="simLog" class="sim-log-box"></pre>
+    </div>
+    <div class="sim-gantt">
+      <h3>Gantt Chart</h3>
+      <div id="ganttChart" class="gantt-bar"></div>
+      <div id="ganttAxis" class="gantt-axis"></div>
+    </div>
+    <div class="sim-metrics">
+      <div>
+        <h3>Average Metrics</h3>
+        <ul class="sim-metrics-list">
+          <li>Average Waiting Time: <span id="avgWaiting">-</span></li>
+          <li>Average Turnaround Time: <span id="avgTurnaround">-</span></li>
+          <li>Throughput: <span id="throughput">-</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>CPU Utilization</h3>
+        <div class="sim-progress-bg">
+          <div id="cpuUtilBar" class="sim-progress-bar"></div>
+        </div>
+        <span id="cpuUtilPercent" class="sim-progress-label">0%</span>
+      </div>
+    </div>
+  </div>
+  <script src="algorithm.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

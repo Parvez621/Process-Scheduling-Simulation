@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Process Scheduling Algorithm Simulation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="split-container">
+    <!-- Left: Introduction -->
+    <div class="intro-section">
+      <h1 class="title">Process Scheduling Algorithm Simulation</h1>
+      <p class="subtitle">
+        Process scheduling is a fundamental concept in operating systems that determines the order in which processes access the CPU. Explore how different algorithms like FCFS, SJF, Priority, and Round Robin affect process execution, waiting times, and CPU efficiency.
+      </p>
+      <ul class="intro-points">
+        <li>Visualize scheduling with Gantt charts</li>
+        <li>Compare turnaround and waiting times</li>
+        <li>Understand preemptive vs non-preemptive scheduling</li>
+      </ul>
+    </div>
+
+    <!-- Right: Simulation Controls -->
+    <div class="form-section">
+      <form class="form" id="simulation-form" autocomplete="off">
+        <div class="form-group">
+          <label class="label" for="algorithm">Select Algorithm</label><br><br>
+          <select class="input" id="algorithm" name="algorithm" required>
+            <option value="">Select an algorithm</option>
+            <option value="fcfs">First-Come, First-Served (FCFS)</option>
+            <option value="sjf-non">Shortest Job First (SJF) Non-Preemptive</option>
+            <option value="sjf-pre">Shortest Job First (SJF) Preemptive</option>
+            <option value="priority">Priority Scheduling</option>
+            <option value="rr">Round Robin</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="label" for="num-processes">Number of Processes</label><br><br>
+          <input class="input small-input" type="number" id="num-processes" name="num-processes" min="1" max="10" required>
+        </div>
+        <div id="process-inputs"></div>
+        <div class="form-group hidden" id="time-quantum-group">
+          <label class="label" for="time-quantum">Time Quantum (Round Robin):</label>
+          <input class="input small-input" type="number" id="time-quantum" name="time-quantum" min="1">
+        </div>
+        <button class="button" type="submit">Start Simulation</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom: How to Use Section -->
+  <section class="how-to" style="margin-top: 40px; padding: 20px;">
+    <h2 class="subtitle">How to Use</h2>
+    <ul class="instructions">
+      <li>Select the scheduling algorithm from the dropdown.</li>
+      <li>Enter the number of processes (1 to 10).</li>
+      <li>Fill in the Arrival Time and Burst Time for each process.</li>
+      <li>If Priority Scheduling is selected, enter the priority for each process (lower number = higher priority).</li>
+      <li>If Round Robin is selected, enter the Time Quantum value.</li>
+      <li>Click "Start Simulation" to proceed to the simulation page.</li>
+    </ul>
+  </section>
+
+  <script>
+    // Dynamic input generation for process details
+    const numProcessesInput = document.getElementById('num-processes');
+    const processInputsDiv = document.getElementById('process-inputs');
+    const algorithmSelect = document.getElementById('algorithm');
+    const timeQuantumGroup = document.getElementById('time-quantum-group');
+
+    function renderProcessInputs() {
+      const num = parseInt(numProcessesInput.value, 10);
+      const algo = algorithmSelect.value;
+      processInputsDiv.innerHTML = '';
+      if (!num || num < 1 || num > 10) return;
+
+      for (let i = 1; i <= num; i++) {
+        const row = document.createElement('div');
+        row.className = 'process-row';
+        row.innerHTML = `
+          <span class="label">P${i}</span>
+          <label class="label">Arrival Time:
+            <input class="input small-input" type="number" name="arrival-${i}" min="0" required>
+          </label>
+          <label class="label">Burst Time:
+            <input class="input small-input" type="number" name="burst-${i}" min="1" required>
+          </label>
+          ${algo === 'priority' ? `
+            <label class="label">Priority:
+              <input class="input small-input" type="number" name="priority-${i}" min="1" required>
+            </label>
+          ` : ''}
+        `;
+        processInputsDiv.appendChild(row);
+      }
+    }
+
+    numProcessesInput.addEventListener('input', renderProcessInputs);
+    algorithmSelect.addEventListener('change', () => {
+      // Show/hide Time Quantum input
+      if (algorithmSelect.value === 'rr') {
+        timeQuantumGroup.classList.remove('hidden');
+      } else {
+        timeQuantumGroup.classList.add('hidden');
+      }
+      renderProcessInputs();
+    });
+    // Handle form submission
+document.getElementById('simulation-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const algorithm = document.getElementById('algorithm').value;
+  const numProcesses = parseInt(document.getElementById('num-processes').value);
+  let url = `simulation.html?algorithm=${algorithm}&num-processes=${numProcesses}`;
+
+  for (let i = 1; i <= numProcesses; i++) {
+    const arrival = document.querySelector(`[name="arrival-${i}"]`).value;
+    const burst = document.querySelector(`[name="burst-${i}"]`).value;
+    url += `&arrival-${i}=${arrival}&burst-${i}=${burst}`;
+
+    if (algorithm === 'priority') {
+      const priority = document.querySelector(`[name="priority-${i}"]`).value;
+      url += `&priority-${i}=${priority}`;
+    }
+  }
+
+  if (algorithm === 'rr') {
+    const tq = document.getElementById('time-quantum').value;
+    url += `&time-quantum=${tq}`;
+  }
+
+  window.location.href = url;
+});
+
+  </script>
+</body>
+</html>
